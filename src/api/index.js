@@ -1,5 +1,5 @@
 import axios from 'axios';
-import config from '../../config';
+import config from '../../clientConfig';
 
 async function request(method = 'get', path = '/', data = {}) {
   const url = `${config.api}${path}`;

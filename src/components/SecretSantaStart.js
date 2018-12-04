@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import config from '../../config';
+import config from '../../clientConfig';
 import api from '../api';
 import secretSantaValidator from '../validators/secretSanta';
 

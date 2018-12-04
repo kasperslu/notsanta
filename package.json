@@ -1,0 +1,38 @@
+{
+  "name": "notsanta",
+  "description": "A very simple app for the Secret Santa gift exchange.",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "Rafal Swietek <raf.swietek@gmail.com> (https://github.com/rafalswietek)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rafalswietek/notsanta.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rafalswietek/notsanta/issues"
+  },
+  "homepage": "https://notsanta.com",
+  "scripts": {
+    "dev": "node server.js",
+    "build": "next build",
+    "start": "NODE_ENV=production node server.js"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "babel-plugin-inline-react-svg": "^1.0.0",
+    "classnames": "^2.2.6",
+    "express": "^4.16.4",
+    "file-loader": "^2.0.0",
+    "mongoose": "^5.3.4",
+    "next": "^7.0.2",
+    "node-sass": "^4.9.4",
+    "prop-types": "^15.6.2",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-snowflakes": "^1.0.0",
+    "styled-jsx-plugin-sass": "^0.3.0",
+    "uniqid": "^5.0.3",
+    "url-loader": "^1.1.2",
+    "validator": "^10.8.0"
+  }
+}

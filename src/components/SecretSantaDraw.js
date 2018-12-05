@@ -4,15 +4,9 @@ import classnames from 'classnames';
 import api from '../api';
 
 class SecretSantaDraw extends React.PureComponent {
-  constructor() {
-    super();
+  state = { assigned: '' };
 
-    this.state = {
-      assigned: '',
-    };
-
-    this.submit = this.submit.bind(this);
-  }
+  submit = this.submit.bind(this);
 
   getFriendsButtons() {
     return this.props.secretSantaGroup.friends.map((friend, i) => (
@@ -42,14 +36,14 @@ class SecretSantaDraw extends React.PureComponent {
             border: none;
             cursor: pointer;
             transition: background 0.2s ease;
-            outline: none;
           }
 
           .secretSantaDraw__button:hover {
             background: darken(#FFB62E, 5%);
           }
 
-          .secretSantaDraw__button--disabled {
+          .secretSantaDraw__button--disabled,
+          .secretSantaDraw__button--disabled:hover {
             background: #ADB155;
             color: #ADDCD2;
             cursor: not-allowed;

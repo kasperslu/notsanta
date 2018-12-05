@@ -1,30 +1,26 @@
 import React from 'react';
 import Link from 'next/link';
-import config from '../../clientConfig';
 import api from '../api';
 import secretSantaValidator from '../validators/secretSanta';
+import Input from './Input';
 
 class SecretSantaStart extends React.PureComponent {
-  constructor() {
-    super();
+  state = {
+    data: {
+      name: '',
+      friends: [
+        { name: '' },
+        { name: '' },
+      ],
+    },
+    secretSantaGroupId: '',
+    errors: {},
+  };
 
-    this.state = {
-      data: {
-        name: '',
-        friends: [
-          { name: '' },
-          { name: '' },
-        ],
-      },
-      secretSantaGroupId: '',
-      errors: {},
-    };
-
-    this.onChange = this.onChange.bind(this);
-    this.onFriendNameChange = this.onFriendNameChange.bind(this);
-    this.addNewFriendInput = this.addNewFriendInput.bind(this);
-    this.submit = this.submit.bind(this);
-  }
+  onChange = this.onChange.bind(this);
+  onFriendNameChange = this.onFriendNameChange.bind(this);
+  addNewFriendInput = this.addNewFriendInput.bind(this);
+  submit = this.submit.bind(this);
 
   onChange(e) {
     e.preventDefault();
@@ -61,18 +57,15 @@ class SecretSantaStart extends React.PureComponent {
 
     return data.friends.map((friend, i) =>
       (
-        <div key={i} className="secretSantaForm__group">
-          <label className="secretSantaForm__label" htmlFor="name">{i === 0 ? 'Your name' : 'Friend\'s name'}</label>
-          <input
-            name={`friend-${i}`}
-            className="secretSantaForm__input"
-            onChange={e => this.onFriendNameChange(e, i)}
-            value={data.friends[i].name}
-          />
-          {errors.friends && errors.friends[i] &&
-            <span className="secretSantaForm__error">{errors.friends[i]}</span>
-          }
-        </div>
+        <Input
+          key={i}
+          name={`friend-${i}`}
+          label={i === 0 ? 'Your name' : 'Friend\'s name'}
+          onChange={e => this.onFriendNameChange(e, i)}
+          value={data.friends[i].name}
+          autoComplete={false}
+          error={errors.friends && errors.friends[i]}
+        />
       ));
   }
 
@@ -114,7 +107,7 @@ class SecretSantaStart extends React.PureComponent {
         {secretSantaGroupId
           ? <>
             <span className="secretSantaSuccess__text">Now visit the Secret Santa link and share it with your friends!</span>
-            <a className="secretSantaSuccess__link">{`${config.host}/ss/${secretSantaGroupId}`}</a>
+            <a className="secretSantaSuccess__link">{`${window.location.protocol}//${window.location.host}/ss/${secretSantaGroupId}`}</a>
             <div className="secretSantaForm__buttonsGroup">
               <Link as={`/ss/${secretSantaGroupId}`} href={`/secret-santa?secretSantaGroupId=${secretSantaGroupId}`}>
                 <button className="secretSantaForm__button">Let&apos;s go there!</button>
@@ -125,11 +118,14 @@ class SecretSantaStart extends React.PureComponent {
             <span className="secretSantaStart__description">Start your secret santa gift exchange!</span>
 
             <div className="secretSantaForm">
-              <div className="secretSantaForm__group">
-                <label className="secretSantaForm__label" htmlFor="name">Group Name</label>
-                <input className="secretSantaForm__input" id="name" name="name" onChange={this.onChange} value={data.name} />
-                {errors.name && <span className="secretSantaForm__error">{errors.name}</span>}
-              </div>
+              <Input
+                name="name"
+                label="Group Name"
+                onChange={this.onChange}
+                value={data.name}
+                autoComplete={false}
+                error={errors.name}
+              />
 
               <div className="secretSantaForm__friendsInputs">
                 {this.getFriendsInputs()}
@@ -166,34 +162,11 @@ class SecretSantaStart extends React.PureComponent {
             margin: 0 auto;
           }
 
-          .secretSantaForm__group {
-            margin: 8px 0;
-            width: 100%;
-          }
-
-          .secretSantaForm__label {
-            display: inline-block;
-            padding: 0 0 10px;
-            color: #BDE3DC;
-            font-size: 12px;
-          }
-
-          .secretSantaForm__input {
-            border: none;
-            border-bottom: 1px solid #BDE3DC;
-            background: transparent;
-            color: #FFF;
-            padding: 0 0 5px;
-            margin-bottom: 10px;
-            outline: none;
-            font-size: 16px;
-            width: 100%;
-            box-sizing: border-box;
-          }
-
           .secretSantaForm__friendsInputs {
             display: flex;
             flex-flow: row wrap;
+            margin-bottom: 30px;
+            width: 100%;
           }
 
           .secretSantaForm__buttonsGroup {
@@ -217,7 +190,6 @@ class SecretSantaStart extends React.PureComponent {
             border: none;
             cursor: pointer;
             transition: background 0.2s ease;
-            outline: none;
 
             &:hover {
               background: darken(#FFB62E, 5%);

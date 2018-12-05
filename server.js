@@ -29,9 +29,11 @@ app.prepare()
     server.use('/favicon.ico', express.static(
       path.join(__dirname, 'static/favicon.ico')
     ));
-
     server.use('/favicon.svg', express.static(
       path.join(__dirname, 'static/favicon.svg')
+    ));
+    server.use('/favicon.png', express.static(
+      path.join(__dirname, 'static/favicon.png')
     ));
 
     server.use('/api', router);
@@ -42,9 +44,7 @@ app.prepare()
       app.render(req, res, actualPage, queryParams);
     });
 
-    server.get('*', (req, res) => {
-      return handle(req, res);
-    });
+    server.get('*', (req, res) => handle(req, res));
 
     server.listen(config.port, (err) => {
       if (err) throw err;

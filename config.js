@@ -1,13 +1,11 @@
-const defaultHost = 'http://localhost:' + (process.env.PORT || 3000);
-
 module.exports = {
-  host: process.env.HOST || defaultHost,
   port: process.env.PORT || 3000,
-  api: process.env.API || defaultHost,
   mongodb: {
     host: process.env.MONGODB_HOST || 'localhost',
     port: process.env.MONGODB_PORT || '27017',
     database: process.env.MONGODB_NAME || 'notsanta',
+    user: process.env.MONGODB_USER,
+    password: process.env.MONGODB_PASSWORD,
+    authSource: process.env.MONGODB_AUTH_SOURCE,
   },
-  gtm: process.env.GTM,
 };

@@ -1,8 +1,7 @@
 import axios from 'axios';
-import config from '../../clientConfig';
 
 async function request(method = 'get', path = '/', data = {}) {
-  const url = `${config.api}${path}`;
+  const url = `https://notsanta.com${path}`;
   const res = await axios({
     method,
     url,

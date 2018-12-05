@@ -2,7 +2,6 @@ import React from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
 import Snowflakes from './Snowflakes';
-import config from '../../clientConfig';
 
 class App extends React.PureComponent {
   render() {
@@ -11,15 +10,14 @@ class App extends React.PureComponent {
         <Head>
           <title>You&apos;re not santa.</title>
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+          <link rel="icon" type="image/png" href="/favicon.png" />
           <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
           <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-          {config.gtm &&
-            <script dangerouslySetInnerHTML={{ __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','${config.gtm}');` }} />
-          }
+          <script dangerouslySetInnerHTML={{ __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer','GTM-T5WBKHR');` }} />
         </Head>
 
         <Snowflakes />
@@ -40,6 +38,11 @@ class App extends React.PureComponent {
           @import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
           @import url('https://fonts.googleapis.com/css?family=Grand+Hotel');
 
+          * {
+            box-sizing: border-box;
+            outline: none;
+          }
+
           body {
             margin: 0;
             padding: 0;
@@ -59,7 +62,6 @@ class App extends React.PureComponent {
           }
 
           a {
-            outline: none;
             text-decoration: none;
           }
 
@@ -93,14 +95,14 @@ class App extends React.PureComponent {
             background-image:
               url(${require('../assets/animals.svg')}),
               url(${require('../assets/animals-ground.svg')}),
-              radial-gradient(#A63636 0%, #A63636 68%, transparent 68%, transparent 100%);
+              url(${require('../assets/oval.svg')});
             background-repeat: no-repeat, no-repeat, no-repeat;
             background-position: center calc(100% - 20px), bottom, center 30px;
             background-size: auto, auto, 40px 40px;
             max-width: 500px;
             margin: 0 auto 40px;
             padding: 110px 80px 280px;
-            box-sizing: border-box;
+            overflow: hidden;
 
             &::before, &::after {
               content: '';

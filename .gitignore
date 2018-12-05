@@ -16,3 +16,4 @@ npm-debug.log*
 .vscode
 .sass-cache
 *.pem
+.env
